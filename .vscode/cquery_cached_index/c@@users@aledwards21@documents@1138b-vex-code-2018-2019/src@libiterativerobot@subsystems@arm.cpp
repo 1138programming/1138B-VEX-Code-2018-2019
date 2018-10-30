@@ -6,11 +6,11 @@ Arm::Arm() {
   firstArmMotor = Motor::getMotor(firstArmPort);
   secondArmMotor = Motor::getMotor(secondArmPort);
 
-  // Add all follower motors
-  firstArmMotor->addFollower(secondArmMotor);
-
   // Reverse motors as necessary
   secondArmMotor->reverse();
+
+  // Set follower motors
+  firstArmMotor->addFollower(secondArmMotor);
 
   armController = new PIDController(firstArmMotor, 0.32, 0, 0.05);
 }
@@ -54,5 +54,5 @@ void Arm::enablePID() {
 }
 
 std::int32_t Arm::getEncoderValue() {
-  return armMotor->getEncoderValue();
+  return firstArmMotor->getEncoderValue();
 }

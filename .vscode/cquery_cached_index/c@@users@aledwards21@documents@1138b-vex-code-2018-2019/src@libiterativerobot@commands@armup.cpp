@@ -33,7 +33,7 @@ bool ArmUp::isFinished() {
 
 void ArmUp::end() {
   // Code that runs when isFinished() returns true.
-  Robot::arm->move(0);
+  Robot::arm->move(0); 
 }
 
 void ArmUp::interrupted() {

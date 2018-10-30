@@ -16,8 +16,6 @@ Motor::Motor(std::uint8_t channel) {
   gearset = defaultGearset;
   encoderUnits = defaultEncoderUnits;
   speed = 0;
-  slewedSpeed = 0;
-  slewStep = defaultSlewStep;
   multiplier = 1;
   following = false;
   master = NULL;
@@ -55,6 +53,10 @@ Motor* Motor::getMotor(int motorPort) {
 
 Motor* Motor::getMotor(Port motorPort) {
   return motorInstances[motorPort - 1];
+}
+
+pros::Motor* Motor::getMotorObject() {
+  return v5Motor;
 }
 
 // Sets the speed of the motor
@@ -142,15 +144,6 @@ MotorType Motor::getMotorType() {
 // doesn't work
 int Motor::updateSlewRate(int targetSpeed) {
   // A bit of motor slewing to make sure that we don't stall
-  int deltaSpeed = targetSpeed - slewedSpeed;
-  int sign = deltaSpeed < 0 ? -1 : 1;
-  if (abs(deltaSpeed) > slewStep) {
-    slewedSpeed += slewStep * sign;
-  } else {
-    slewedSpeed = targetSpeed;
-  }
-
-  return slewedSpeed;
 }
 
 void Motor::move() {

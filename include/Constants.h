@@ -22,7 +22,8 @@ const int rightFrontBasePort = 3;
 const int rightMiddleBasePort = 2;
 const int rightBackBasePort = 1;
 
-const int armPort = 10;
+const int firstArmPort = 10;
+const int secondArmPort = 9;
 
 //Motor and encoder constants
 const int KMaxMotorSpeed = 127;

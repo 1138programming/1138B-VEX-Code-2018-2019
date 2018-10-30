@@ -3,10 +3,16 @@
 
 Arm::Arm() {
   // Get arm motors
-  armMotor = Motor::getMotor(armPort);
-  //armMotor->reverse();
+  firstArmMotor = Motor::getMotor(firstArmPort);
+  secondArmMotor = Motor::getMotor(secondArmPort);
 
-  armController = new PIDController(armMotor, 0.32, 0, 0.05);
+  // Reverse motors as necessary
+  secondArmMotor->reverse();
+
+  // Set follower motors
+  firstArmMotor->addFollower(secondArmMotor);
+
+  armController = new PIDController(firstArmMotor, 0.32, 0, 0.05);
 }
 
 void Arm::initDefaultCommand() {
@@ -20,7 +26,7 @@ void Arm::initDefaultCommand() {
  */
 void Arm::move(int speed) {
   //printf("Arm speed is %d\n", speed);
-  armMotor->setSpeed(speed);
+  firstArmMotor->setSpeed(speed);
 }
 
 void Arm::setSetpoint(int setpoint) {
@@ -48,5 +54,5 @@ void Arm::enablePID() {
 }
 
 std::int32_t Arm::getEncoderValue() {
-  return armMotor->getEncoderValue();
+  return firstArmMotor->getEncoderValue();
 }

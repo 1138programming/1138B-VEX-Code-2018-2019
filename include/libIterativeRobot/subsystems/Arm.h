@@ -7,7 +7,8 @@
 class Arm : public libIterativeRobot::Subsystem {
   private:
     // Arm motors
-    Motor* armMotor;
+    Motor* firstArmMotor;
+    Motor* secondArmMotor;
 
     PIDController* armController;
 
