@@ -22,8 +22,9 @@ const int rightFrontBasePort = 3;
 const int rightMiddleBasePort = 2;
 const int rightBackBasePort = 1;
 
-const int firstArmPort = 10;
-const int secondArmPort = 9;
+const int armPort = 9;
+
+const int clawPort = 10;
 
 //Motor and encoder constants
 const int KMaxMotorSpeed = 127;
@@ -37,6 +38,11 @@ const unsigned char exampleIMEAddress = 0;
 // Encoder ports
 const int exampleEncoderTopPort = 0;
 const int exampleEncoderBottomPort = 1;
+
+// Encoder Constants
+const int ticksPerRev36 = 1800; // Ticks per revolution on an 36:1 gear motor
+const int ticksPerRev18 = 900; // Ticks per revolution on an 18:1 gear motor
+const int ticksPerRev6 = 300; // Ticks per revolution on an 6:1 gear motor
 
 // Global things that we need
 

@@ -6,13 +6,16 @@
 #include "libIterativeRobot/commands/StopBase.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/ArmControl.h"
+#include "libIterativeRobot/commands/ClawControl.h"
 #include "libIterativeRobot/commands/ArmUp.h"
+#include "libIterativeRobot/commands/FlipClaw.h"
 #include "libIterativeRobot/commands/SpeedChange.h"
 
 #include "libIterativeRobot/commands/AutonGroup1.h"
 
-Base*  Robot::base = 0;
 Arm*  Robot::arm = 0;
+Base*  Robot::base = 0;
+Claw*  Robot::claw = 0;
 
 pros::Controller* Robot::mainController = 0;
 pros::Controller* Robot::partnerController = 0;
@@ -21,8 +24,9 @@ Robot::Robot() {
   printf("Overridden robot constructor!\n");
   autonGroup = NULL;
   // Initialize any subsystems
-  base = new Base();
   arm = new Arm();
+  base = new Base();
+  claw = new Claw();
 
   mainController = new pros::Controller(pros::E_CONTROLLER_MASTER);
   partnerController = new pros::Controller(pros::E_CONTROLLER_PARTNER);
@@ -31,15 +35,11 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* RightX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_X);
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickChannel* PartnerRightY = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+  libIterativeRobot::JoystickChannel* PartnerLeftY = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
+  libIterativeRobot::JoystickButton* flipClaw = new libIterativeRobot::JoystickButton(partnerController, pros::E_CONTROLLER_DIGITAL_L1);
   libIterativeRobot::JoystickButton* armUpButton = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
-  armUpButton->whenPressed(new ArmUp(1000));
-
   libIterativeRobot::JoystickButton* slowBase = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
-  slowBase->whenPressed(new SpeedChange(0.5));
-
   libIterativeRobot::JoystickButton* normalBase = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
-  normalBase->whenPressed(new SpeedChange(1));
-
 
   // Add commands to be run to buttons
   DriveWithJoy* driveCommand = new DriveWithJoy();
@@ -47,6 +47,12 @@ Robot::Robot() {
   LeftY->whilePastThreshold(driveCommand);
 
   PartnerRightY->whilePastThreshold(new ArmControl());
+  PartnerLeftY->whilePastThreshold(new ClawControl());
+
+  flipClaw->whenPressed(new FlipClaw());
+  armUpButton->whenPressed(new ArmUp(1000));
+  slowBase->whenPressed(new SpeedChange(0.5));
+  normalBase->whenPressed(new SpeedChange(1));
 }
 
 void Robot::robotInit() {
@@ -64,7 +70,7 @@ void Robot::autonPeriodic() {
   //printf("Default autonPeriodic() function\n");
   libIterativeRobot::EventScheduler::getInstance()->update();
   Motor::periodicUpdate();
-  //PIDController::loopAll();
+  PIDController::loopAll();
 }
 
 void Robot::teleopInit() {
@@ -76,7 +82,7 @@ void Robot::teleopPeriodic() {
   //printf("Default teleopPeriodic() function\n");
   libIterativeRobot::EventScheduler::getInstance()->update();
   Motor::periodicUpdate();
-  //PIDController::loopAll();
+  PIDController::loopAll();
 }
 
 void Robot::disabledInit() {

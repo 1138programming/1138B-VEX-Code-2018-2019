@@ -2,6 +2,7 @@
 #define _SUBSYSTEMS_PIDCONTROLLER_H_
 
 #include "Motor.h"
+#include <vector>
 
 class PIDController {
   private:
@@ -22,7 +23,7 @@ class PIDController {
     int threshold = 15; // Default value
     float deltaTime = 0;
     int lastTime = 0;
-    static PIDController* instances[MAX_MOTORS]; // A static array to contain all PIDController instances
+    static std::vector<PIDController*> instances; // A vector to contain all PIDController instances
     void addInstance();
   public:
     PIDController(Motor* motorChannel, float kP = 1, float kI = 0, float kD = 0);

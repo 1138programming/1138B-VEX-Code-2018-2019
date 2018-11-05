@@ -126,12 +126,12 @@ int Motor::getChannel() {
 }
 
 std::int32_t Motor::getEncoderValue() {
-  if (this->motorType == v4) {
-    if (this->encoder != NULL)
-      return this->encoder->get_value();
+  if (motorType == v4) {
+    if (encoder != NULL)
+      return encoder->get_value() * abs(multiplier) / multiplier;
   } else {
     std::uint32_t time = pros::millis();
-    return this->v5Motor->get_raw_position(&time);
+    return v5Motor->get_raw_position(&time) * abs(multiplier) / multiplier;
   }
   return 0;
 }

@@ -22,6 +22,7 @@ class Robot : public libIterativeRobot::RobotBase {
     // Pointers to every subsystem on the robot:
     static Arm* arm;
     static Base* base;
+    static Claw* claw;
 
     libIterativeRobot::CommandGroup* autonGroup = NULL;
 

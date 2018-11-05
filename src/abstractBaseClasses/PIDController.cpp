@@ -1,6 +1,6 @@
 #include "abstractBaseClasses/PIDController.h"
 
-PIDController* PIDController::instances[MAX_MOTORS] = {0}; //  All values are initialized to 0
+std::vector<PIDController*> PIDController::instances; //  All values are initialized to 0
 
 PIDController::PIDController(Motor* outputMotor, float kP, float kI, float kD) {
   this->outputMotor = outputMotor;
@@ -12,12 +12,7 @@ PIDController::PIDController(Motor* outputMotor, float kP, float kI, float kD) {
 }
 
 void PIDController::addInstance() {
-  for (int i = 0; i < MAX_MOTORS; i++) {
-    if (instances[i] == 0) {
-      instances[i] = this;
-      return;
-    }
-  }
+  instances.push_back(this);
 }
 
 void PIDController::setKp(float kP) {
@@ -74,7 +69,7 @@ void PIDController::loop() {
   int sign = output < 0 ? output == 0 ? -1 : 0 : 1;
   //int sign = 0;
   output = confineToRange(output + (sign * 12));
-  printf("Current sensor value is %d\n", currSensorValue);
+  //printf("Current sensor value is %d\n", currSensorValue);
   //printf("Error is %d, integral is %f, derivative is %f, and output is %d\n", error, integral, derivative, output);
   //printf("Error is %d and output is %d\n", error, output);
   // if (this->outputMotor->getChannel() == 10) {
@@ -90,13 +85,13 @@ void PIDController::lock() {
 }
 
 bool PIDController::atSetpoint() {
-  bool atSetpoint = inRange(this->currSensorValue, setpoint - threshold, setpoint + threshold) && fabs(derivative) < 0.1;
+  bool atSetpoint = inRange(this->currSensorValue, setpoint - threshold, setpoint + threshold) && fabs(derivative) < 0.1; // Checks if the sensor value is within a threshold of the target and whether the derivative is less than 0.1
   return atSetpoint;
 }
 
 void PIDController::loopAll() {
-  for (int i = 0; i < MAX_MOTORS; i++) {
-    if(instances[i]->enabled)
+  for (size_t i = 0; i < instances.size(); i++) {
+    if (instances[i]->enabled)
       instances[i]->loop();
   }
 }
