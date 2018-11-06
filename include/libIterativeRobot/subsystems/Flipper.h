@@ -1,15 +1,15 @@
-#ifndef _SUBSYSTEMS_ARM_H_
-#define _SUBSYSTEMS_ARM_H_
+#ifndef _SUBSYSTEMS_FLIPPER_H_
+#define _SUBSYSTEMS_FLIPPER_H_
 
 #include "./Subsystem.h"
 #include "api.h"
 
-class Arm : public libIterativeRobot::Subsystem {
+class Flipper : public libIterativeRobot::Subsystem {
   private:
-    // Arm motors
-    Motor* armMotor;
+    // Flipper motors
+    Motor* flipperMotor;
 
-    PIDController* armController;
+    PIDController* flipperController;
 
   public:
     void initDefaultCommand();
@@ -21,7 +21,7 @@ class Arm : public libIterativeRobot::Subsystem {
     void disablePID();
     void enablePID();
     std::int32_t getEncoderValue();
-    Arm();
+    Flipper();
 };
 
-#endif // _SUBSYSTEMS_ARM_H_
+#endif // _SUBSYSTEMS_FLIPPER_H_

@@ -22,7 +22,7 @@ const int rightFrontBasePort = 3;
 const int rightMiddleBasePort = 2;
 const int rightBackBasePort = 1;
 
-const int armPort = 9;
+const int flipperPort = 9;
 
 const int clawPort = 10;
 

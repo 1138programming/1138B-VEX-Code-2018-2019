@@ -20,7 +20,7 @@ class Robot : public libIterativeRobot::RobotBase {
     Robot();
 
     // Pointers to every subsystem on the robot:
-    static Arm* arm;
+    static Flipper* flipper;
     static Base* base;
     static Claw* claw;
 

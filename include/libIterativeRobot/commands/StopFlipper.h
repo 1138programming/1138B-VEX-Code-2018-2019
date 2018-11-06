@@ -1,9 +1,9 @@
-#ifndef _COMMANDS_STOPARM_H_
-#define _COMMANDS_STOPARM_H_
+#ifndef _COMMANDS_STOPFLIPPER_H_
+#define _COMMANDS_STOPFLIPPER_H_
 
 #include "libIterativeRobot/commands/Command.h"
 
-class StopArm: public libIterativeRobot::Command {
+class StopFlipper: public libIterativeRobot::Command {
   public:
     bool canRun();
     void initialize();
@@ -11,8 +11,8 @@ class StopArm: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    StopArm();
+    StopFlipper();
   private:
 };
 
-#endif // _COMMANDS_STOPARM_H_
+#endif // _COMMANDS_STOPFLIPPER_H_

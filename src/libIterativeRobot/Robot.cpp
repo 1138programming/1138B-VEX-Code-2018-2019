@@ -5,15 +5,15 @@
 
 #include "libIterativeRobot/commands/StopBase.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
-#include "libIterativeRobot/commands/ArmControl.h"
+#include "libIterativeRobot/commands/FlipperControl.h"
 #include "libIterativeRobot/commands/ClawControl.h"
-#include "libIterativeRobot/commands/ArmUp.h"
+#include "libIterativeRobot/commands/FlipperUp.h"
 #include "libIterativeRobot/commands/FlipClaw.h"
 #include "libIterativeRobot/commands/SpeedChange.h"
 
 #include "libIterativeRobot/commands/AutonGroup1.h"
 
-Arm*  Robot::arm = 0;
+Flipper*  Robot::flipper = 0;
 Base*  Robot::base = 0;
 Claw*  Robot::claw = 0;
 
@@ -24,7 +24,7 @@ Robot::Robot() {
   printf("Overridden robot constructor!\n");
   autonGroup = NULL;
   // Initialize any subsystems
-  arm = new Arm();
+  flipper = new Flipper();
   base = new Base();
   claw = new Claw();
 
@@ -37,7 +37,6 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* PartnerRightY = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_RIGHT_Y);
   libIterativeRobot::JoystickChannel* PartnerLeftY = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   libIterativeRobot::JoystickButton* flipClaw = new libIterativeRobot::JoystickButton(partnerController, pros::E_CONTROLLER_DIGITAL_L1);
-  libIterativeRobot::JoystickButton* armUpButton = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
   libIterativeRobot::JoystickButton* slowBase = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
   libIterativeRobot::JoystickButton* normalBase = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
 
@@ -46,11 +45,10 @@ Robot::Robot() {
   RightX->whilePastThreshold(driveCommand);
   LeftY->whilePastThreshold(driveCommand);
 
-  PartnerRightY->whilePastThreshold(new ArmControl());
+  PartnerRightY->whilePastThreshold(new FlipperControl());
   PartnerLeftY->whilePastThreshold(new ClawControl());
 
   flipClaw->whenPressed(new FlipClaw());
-  armUpButton->whenPressed(new ArmUp(1000));
   slowBase->whenPressed(new SpeedChange(0.5));
   normalBase->whenPressed(new SpeedChange(1));
 }

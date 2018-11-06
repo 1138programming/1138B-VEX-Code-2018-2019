@@ -23,7 +23,7 @@ enum MotorType {
 
 class Motor {
   private:
-    const static int slewStep = 14;
+    const static int defaultSlewStep = 14;
 
     std::uint8_t channel; // Motor channel
     pros::motor_gearset_e_t gearset; // v5 motor gearset
@@ -31,6 +31,8 @@ class Motor {
 
     int currSpeed; // Used by updateSlew Rate
     int speed; // Speed of the motor
+    int slewedSpeed;
+    int slewStep;
     float multiplier; // Applied to speed
     int threshold = 5;
 
@@ -56,8 +58,6 @@ class Motor {
     static Motor* getMotor(int motorPort); // Gets a motor on the specified port, between ports 1-22
     static Motor* getMotor(Port motorPort); // Gets a motor on the specified port, between ports A-H
 
-    pros::Motor* getMotorObject();
-
     // These functions change something about the motor object
     void setSpeed(int speed); // Sets the speed of the motor
     void setThreshold(int threshold); // Sets a threshold for the motor's speed
@@ -72,6 +72,8 @@ class Motor {
     int getChannel(); // Gets the motor's channel
     std::int32_t getEncoderValue(); // Gets the encoder value of the motor
     MotorType getMotorType(); // Gets the type of motor
+
+    pros::Motor* getMotorObject();
 
     // These functions are called repeatedly, updating the motor object
     int updateSlewRate(int targetSpeed); // Doesn't work

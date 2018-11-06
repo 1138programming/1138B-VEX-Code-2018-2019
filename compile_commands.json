@@ -1008,41 +1008,6 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "bin/abstractBaseClasses/Motor.cpp.o",
-            "src\\abstractBaseClasses\\Motor.cpp"
-        ],
-        "directory": "C:\\Users\\CIHerrera20\\Desktop\\PROSv3\\1138B-VEX-Code-2018-2019",
-        "file": "src\\abstractBaseClasses\\Motor.cpp"
-    },
-    {
-        "arguments": [
-            "clang++",
-            "-c",
-            "-target",
-            "armv7ar-none-none-eabi",
-            "-fno-ms-extensions",
-            "-fno-ms-compatibility",
-            "-fno-delayed-template-parsing",
-            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1",
-            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/arm-none-eabi/thumb/v7-ar/fpv3/softfp",
-            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/backward",
-            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include",
-            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include-fixed",
-            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include",
-            "-iquote./include",
-            "-iquote./include/abstractBaseClasses/",
-            "-mcpu=cortex-a9",
-            "-mfpu=neon-fp16",
-            "-mfloat-abi=softfp",
-            "-D_POSIX_THREADS",
-            "-D_UNIX98_THREAD_MUTEX_ATTRIBUTES",
-            "-Os",
-            "-funwind-tables",
-            "-ffunction-sections",
-            "-fdata-sections",
-            "-fdiagnostics-color",
-            "--std=gnu++17",
-            "-o",
             "bin/abstractBaseClasses/PIDController.cpp.o",
             "src\\abstractBaseClasses\\PIDController.cpp"
         ],
@@ -1135,7 +1100,7 @@
             "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include-fixed",
             "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include",
             "-iquote./include",
-            "-iquote./include/libIterativeRobot/commands/",
+            "-iquote./include/abstractBaseClasses/",
             "-mcpu=cortex-a9",
             "-mfpu=neon-fp16",
             "-mfloat-abi=softfp",
@@ -1148,11 +1113,11 @@
             "-fdiagnostics-color",
             "--std=gnu++17",
             "-o",
-            "bin/libIterativeRobot/commands/ClawControl.cpp.o",
-            "src\\libIterativeRobot\\commands\\ClawControl.cpp"
+            "bin/abstractBaseClasses/Motor.cpp.o",
+            "src\\abstractBaseClasses\\Motor.cpp"
         ],
         "directory": "C:\\Users\\CIHerrera20\\Desktop\\PROSv3\\1138B-VEX-Code-2018-2019",
-        "file": "src\\libIterativeRobot\\commands\\ClawControl.cpp"
+        "file": "src\\abstractBaseClasses\\Motor.cpp"
     },
     {
         "arguments": [
@@ -1188,5 +1153,40 @@
         ],
         "directory": "C:\\Users\\CIHerrera20\\Desktop\\PROSv3\\1138B-VEX-Code-2018-2019",
         "file": "src\\libIterativeRobot\\commands\\FlipClaw.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-target",
+            "armv7ar-none-none-eabi",
+            "-fno-ms-extensions",
+            "-fno-ms-compatibility",
+            "-fno-delayed-template-parsing",
+            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1",
+            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/arm-none-eabi/thumb/v7-ar/fpv3/softfp",
+            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include/c++/7.2.1/backward",
+            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include",
+            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/include-fixed",
+            "-isystemc:\\program files\\pros\\toolchain\\usr\\bin\\../lib/gcc/arm-none-eabi/7.2.1/../../../../arm-none-eabi/include",
+            "-iquote./include",
+            "-iquote./include/libIterativeRobot/commands/",
+            "-mcpu=cortex-a9",
+            "-mfpu=neon-fp16",
+            "-mfloat-abi=softfp",
+            "-D_POSIX_THREADS",
+            "-D_UNIX98_THREAD_MUTEX_ATTRIBUTES",
+            "-Os",
+            "-funwind-tables",
+            "-ffunction-sections",
+            "-fdata-sections",
+            "-fdiagnostics-color",
+            "--std=gnu++17",
+            "-o",
+            "bin/libIterativeRobot/commands/ClawControl.cpp.o",
+            "src\\libIterativeRobot\\commands\\ClawControl.cpp"
+        ],
+        "directory": "C:\\Users\\CIHerrera20\\Desktop\\PROSv3\\1138B-VEX-Code-2018-2019",
+        "file": "src\\libIterativeRobot\\commands\\ClawControl.cpp"
     }
 ]

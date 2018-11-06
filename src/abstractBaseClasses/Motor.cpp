@@ -16,6 +16,8 @@ Motor::Motor(std::uint8_t channel) {
   gearset = defaultGearset;
   encoderUnits = defaultEncoderUnits;
   speed = 0;
+  slewedSpeed = 0;
+  slewStep = defaultSlewStep;
   multiplier = 1;
   following = false;
   master = NULL;
@@ -53,10 +55,6 @@ Motor* Motor::getMotor(int motorPort) {
 
 Motor* Motor::getMotor(Port motorPort) {
   return motorInstances[motorPort - 1];
-}
-
-pros::Motor* Motor::getMotorObject() {
-  return v5Motor;
 }
 
 // Sets the speed of the motor
@@ -130,8 +128,9 @@ std::int32_t Motor::getEncoderValue() {
     if (encoder != NULL)
       return encoder->get_value() * abs(multiplier) / multiplier;
   } else {
-    std::uint32_t time = pros::millis();
-    return v5Motor->get_raw_position(&time) * abs(multiplier) / multiplier;
+    //std::uint32_t time = pros::millis();
+    //return this->v5Motor->get_raw_position(&time);
+    return v5Motor->get_position() * abs(multiplier) / multiplier;
   }
   return 0;
 }
@@ -141,17 +140,30 @@ MotorType Motor::getMotorType() {
   return motorType;
 }
 
+pros::Motor* Motor::getMotorObject() {
+  return this->v5Motor;
+}
+
 // doesn't work
 int Motor::updateSlewRate(int targetSpeed) {
   // A bit of motor slewing to make sure that we don't stall
+  int deltaSpeed = targetSpeed - slewedSpeed;
+  int sign = deltaSpeed < 0 ? -1 : 1;
+  if (abs(deltaSpeed) > slewStep) {
+    slewedSpeed += slewStep * sign;
+  } else {
+    slewedSpeed = targetSpeed;
+  }
+
+  return slewedSpeed;
 }
 
 void Motor::move() {
   //printf("Motor speed is %d\n", speed);
   if (motorType == v4)
-    v4Motor->set_value(speed);
+    v4Motor->set_value(updateSlewRate(speed));
   else
-    v5Motor->move(speed);
+    v5Motor->move(updateSlewRate(speed));
 }
 
 void Motor::periodicUpdate() {
