@@ -31,6 +31,7 @@ class PIDController {
     void setKi(float kI);
     void setKd(float kD);
     void setSetpoint(int setpoint);
+    void setSetpointRelative(int setpoint);
     int getSetpoint();
     //void setSensorEncoder(pros::ADIEncoder* encoder);
     //void setSensorIME(unsigned char IMEaddress);

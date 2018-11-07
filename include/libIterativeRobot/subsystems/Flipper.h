@@ -15,9 +15,8 @@ class Flipper : public libIterativeRobot::Subsystem {
     void initDefaultCommand();
     void move(int speed);
     void setSetpoint(int setpoint);
+    void setSetpointRelative(int setpoint);
     bool atSetpoint();
-    void loop();
-    void lock();
     void disablePID();
     void enablePID();
     std::int32_t getEncoderValue();

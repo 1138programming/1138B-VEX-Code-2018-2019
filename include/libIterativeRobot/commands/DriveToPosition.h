@@ -15,8 +15,7 @@ class DriveToPosition : public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    DriveToPosition(int leftTarget, int rightTarget);
-    DriveToPosition(int leftTarget, int rightTarget, int motorSpeed);
+    DriveToPosition(int leftTarget, int rightTarget, int motorSpeed = 0);
 };
 
 #endif // _COMMANDS_DRIVETOPOSITION_H_

@@ -2,9 +2,10 @@
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 
-FlipperControl::FlipperControl() {
+FlipperControl::FlipperControl(int speed) {
   requires(Robot::flipper);
   this->priority = 2;
+  this->speed = speed;
 }
 
 bool FlipperControl::canRun() {
@@ -20,8 +21,8 @@ void FlipperControl::initialize() {
 }
 
 void FlipperControl::execute() {
-  //printf("Flipper control running\n");
-  Robot::flipper->move(Robot::partnerController->get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
+  printf("Flipper control running\n");
+  Robot::flipper->move(speed);
 }
 
 bool FlipperControl::isFinished() {

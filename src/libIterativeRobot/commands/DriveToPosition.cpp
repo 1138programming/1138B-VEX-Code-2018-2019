@@ -1,15 +1,9 @@
 #include "libIterativeRobot/commands/DriveToPosition.h"
 #include "libIterativeRobot/Robot.h"
 
-DriveToPosition::DriveToPosition(int leftTarget, int rightTarget) {
-  requires(Robot::base);
-  this->leftTarget = leftTarget;
-  this->rightTarget = rightTarget;
-  this->motorSpeed = 0;
-}
-
 DriveToPosition::DriveToPosition(int leftTarget, int rightTarget, int motorSpeed) {
   requires(Robot::base);
+  this->priority = 1;
   this->leftTarget = leftTarget;
   this->rightTarget = rightTarget;
   this->motorSpeed = motorSpeed;

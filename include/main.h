@@ -44,9 +44,10 @@
 
 // Subsystems
 #include "libIterativeRobot/subsystems/Subsystem.h"
-#include "libIterativeRobot/subsystems/Flipper.h"
+#include "libIterativeRobot/AutonChooser.h"
 #include "libIterativeRobot/subsystems/Base.h"
 #include "libIterativeRobot/subsystems/Claw.h"
+#include "libIterativeRobot/subsystems/Flipper.h"
 #include "libIterativeRobot/subsystems/ExampleSubsystem.h"
 
 /**

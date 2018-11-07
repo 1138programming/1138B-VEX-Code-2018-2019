@@ -15,7 +15,7 @@ void StopClaw::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
   //Robot::claw->move(0);
-  Robot::claw->lock();
+  Robot::claw->setSetpointRelative(0);
   Robot::claw->enablePID();
 }
 

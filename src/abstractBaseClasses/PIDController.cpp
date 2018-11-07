@@ -33,6 +33,10 @@ void PIDController::setSetpoint(int setpoint) {
   integral = 0;
 }
 
+void PIDController::setSetpointRelative(int setpoint) {
+  this->setpoint = getSensorValue() + setpoint;
+}
+
 int PIDController::getSetpoint() {
   return this->setpoint;
 }

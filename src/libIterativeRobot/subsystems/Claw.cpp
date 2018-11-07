@@ -26,16 +26,12 @@ void Claw::setSetpoint(int setpoint) {
   clawController->setSetpoint(setpoint);
 }
 
+void Claw::setSetpointRelative(int setpoint) {
+  clawController->setSetpointRelative(setpoint);
+}
+
 bool Claw::atSetpoint() {
   return clawController->atSetpoint();
-}
-
-void Claw::loop() {
-  clawController->loop();
-}
-
-void Claw::lock() {
-  clawController->lock();
 }
 
 void Claw::disablePID() {

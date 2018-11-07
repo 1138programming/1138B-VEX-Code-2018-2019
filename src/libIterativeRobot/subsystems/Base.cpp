@@ -22,6 +22,12 @@ Base::Base() {
 
   rightFrontMotor->addFollower(rightMiddleMotor);
   rightFrontMotor->addFollower(rightBackMotor);
+
+  leftController = new PIDController(leftFrontMotor, 0.5, 0, 0);
+  rightController = new PIDController(rightFrontMotor, 0.5, 0, 0);
+
+  leftController->setThreshold(30);
+  rightController->setThreshold(30);
 }
 
 void Base::initDefaultCommand() {
@@ -61,4 +67,28 @@ void Base::setMultiplier(float multiplier) {
 
 bool Base::baseAtTarget() {
   return abs(leftFrontMotor->getMotorObject()->get_target_position() - leftFrontMotor->getMotorObject()->get_position()) <= 5; // Tune threshold and make a varaible
+}
+
+void Base::setSetpoint(int leftSetpoint, int rightSetpoint) {
+  leftController->setSetpoint(leftSetpoint);
+  rightController->setSetpoint(rightSetpoint);
+}
+
+void Base::setSetpointRelative(int leftSetpoint, int rightSetpoint) {
+  leftController->setSetpointRelative(leftSetpoint);
+  rightController->setSetpointRelative(rightSetpoint);
+}
+
+bool Base::atSetpoint() {
+  return leftController->atSetpoint() && rightController->atSetpoint();
+}
+
+void Base::enablePID() {
+  leftController->enabled = true;
+  rightController->enabled = true;
+}
+
+void Base::disablePID() {
+  leftController->enabled = false;
+  rightController->enabled = false;
 }

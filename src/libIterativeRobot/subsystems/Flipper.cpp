@@ -26,16 +26,12 @@ void Flipper::setSetpoint(int setpoint) {
   flipperController->setSetpoint(setpoint);
 }
 
+void Flipper::setSetpointRelative(int setpoint) {
+  flipperController->setSetpointRelative(setpoint);
+}
+
 bool Flipper::atSetpoint() {
   return flipperController->atSetpoint();
-}
-
-void Flipper::loop() {
-  flipperController->loop();
-}
-
-void Flipper::lock() {
-  flipperController->lock();
 }
 
 void Flipper::disablePID() {

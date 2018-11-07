@@ -11,9 +11,9 @@ class FlipperControl: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    FlipperControl();
+    FlipperControl(int speed = 127);
   private:
-    bool Up;
+    int speed = 0;
 };
 
 #endif // _COMMANDS_FLIPPERCONTROL_H_

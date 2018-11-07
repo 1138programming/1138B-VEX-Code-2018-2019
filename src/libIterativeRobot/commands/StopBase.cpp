@@ -17,6 +17,7 @@ void StopBase::initialize() {
 }
 
 void StopBase::execute() {
+  Robot::base->disablePID();
   Robot::base->move(0, 0);
 }
 
