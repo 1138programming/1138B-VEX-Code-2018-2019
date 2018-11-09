@@ -74,8 +74,10 @@ void Robot::autonInit() {
   switch (autonChooser->getAutonChoice()) {
     case 0:
       autonGroup = new AutonGroup1();
+      break;
     case 1:
       autonGroup = new AutonGroup2();
+      break;
   }
 
   autonGroup->run();

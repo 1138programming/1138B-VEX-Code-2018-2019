@@ -2,13 +2,13 @@
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 
-MoveBaseTo::MoveBaseTo(int leftTarget, int rightTarget, bool absolute, float multiplier) {
+MoveBaseTo::MoveBaseTo(int leftTarget, int rightTarget, int timeout, bool absolute) {
   requires(Robot::base);
   this->priority = 1;
   this->leftTarget = leftTarget;
   this->rightTarget = rightTarget;
+  this->timeout = timeout;
   this->absolute = absolute;
-  this->multiplier = multiplier;
 }
 
 bool MoveBaseTo::canRun() {
@@ -26,6 +26,8 @@ void MoveBaseTo::initialize() {
     Robot::base->setSetpoint(leftTarget, rightTarget);
   else
     Robot::base->setSetpointRelative(leftTarget, rightTarget);
+
+  startTime = pros::millis();
 }
 
 void MoveBaseTo::execute() {
@@ -34,7 +36,7 @@ void MoveBaseTo::execute() {
 }
 
 bool MoveBaseTo::isFinished() {
-  return Robot::base->atSetpoint();
+  return Robot::base->atSetpoint() || pros::millis() - startTime >= timeout;
 }
 
 void MoveBaseTo::end() {
