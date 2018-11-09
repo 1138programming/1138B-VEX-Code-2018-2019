@@ -11,11 +11,12 @@ class MoveBaseTo: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    MoveBaseTo(int leftTarget = 0, int rightTarget = 0, bool absolute = false);
+    MoveBaseTo(int leftTarget = 0, int rightTarget = 0, bool absolute = false, float multiplier = 1);
   private:
     int leftTarget = 0;
     int rightTarget = 0;
     bool absolute = false;
+    float multiplier = 1;
 };
 
 #endif // _COMMANDS_MOVEBASETO_H_

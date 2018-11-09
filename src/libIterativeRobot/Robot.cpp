@@ -13,6 +13,7 @@
 #include "libIterativeRobot/commands/MoveBaseTo.h"
 
 #include "libIterativeRobot/commands/AutonGroup1.h"
+#include "libIterativeRobot/commands/AutonGroup2.h"
 
 AutonChooser* Robot::autonChooser = 0;
 Base*  Robot::base = 0;
@@ -73,6 +74,8 @@ void Robot::autonInit() {
   switch (autonChooser->getAutonChoice()) {
     case 0:
       autonGroup = new AutonGroup1();
+    case 1:
+      autonGroup = new AutonGroup2();
   }
 
   autonGroup->run();

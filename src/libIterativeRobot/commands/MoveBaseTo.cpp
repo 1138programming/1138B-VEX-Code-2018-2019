@@ -2,12 +2,13 @@
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 
-MoveBaseTo::MoveBaseTo(int leftTarget, int rightTarget, bool absolute) {
+MoveBaseTo::MoveBaseTo(int leftTarget, int rightTarget, bool absolute, float multiplier) {
   requires(Robot::base);
   this->priority = 1;
   this->leftTarget = leftTarget;
   this->rightTarget = rightTarget;
   this->absolute = absolute;
+  this->multiplier = multiplier;
 }
 
 bool MoveBaseTo::canRun() {
@@ -17,6 +18,9 @@ bool MoveBaseTo::canRun() {
 void MoveBaseTo::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
+
+  //Robot::base->setMultiplier(1);
+
   Robot::base->enablePID();
   if (absolute)
     Robot::base->setSetpoint(leftTarget, rightTarget);
@@ -36,11 +40,13 @@ bool MoveBaseTo::isFinished() {
 void MoveBaseTo::end() {
   // Code that runs when isFinished() returns true.
   //Robot::base->lock();
+  //Robot::base->setMultiplier(1);
   Robot::base->disablePID();
 }
 
 void MoveBaseTo::interrupted() {
   // Code that runs when this command is interrupted by another one
   // with a higher priority.
+  //Robot::base->setMultiplier(1);
   Robot::base->disablePID();
 }
