@@ -92,3 +92,16 @@ void Base::disablePID() {
   leftController->enabled = false;
   rightController->enabled = false;
 }
+
+void Base::setMaxPIDSpeed(int maxSpeed) {
+  leftController->setMaxPIDSpeed(maxSpeed);
+  rightController->setMaxPIDSpeed(maxSpeed);
+}
+
+std::int32_t Base::getLeftEncoder() {
+  return leftFrontMotor->getEncoderValue();
+}
+
+std::int32_t Base::getRightEncoder() {
+  return rightFrontMotor->getEncoderValue();
+}

@@ -2,13 +2,19 @@
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 
-MoveBaseTo::MoveBaseTo(int leftTarget, int rightTarget, int timeout, bool absolute) {
+MoveBaseTo::MoveBaseTo(int leftTarget, int rightTarget, int maxSpeed, int timeout, bool absolute) {
+  // Set requirements
   requires(Robot::base);
-  this->priority = 1;
+
+  // Initialize variables
   this->leftTarget = leftTarget;
   this->rightTarget = rightTarget;
-  this->timeout = timeout;
+  this->maxSpeed = maxSpeed;
   this->absolute = absolute;
+  this->timeout = timeout;
+
+  // Set priority
+  this->priority = 1;
 }
 
 bool MoveBaseTo::canRun() {
@@ -19,7 +25,7 @@ void MoveBaseTo::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
 
-  //Robot::base->setMultiplier(1);
+  //Robot::base->setMaxPIDSpeed(maxSpeed);
 
   Robot::base->enablePID();
   if (absolute)
@@ -32,7 +38,7 @@ void MoveBaseTo::initialize() {
 
 void MoveBaseTo::execute() {
   //printf("Moving base to: %d\n", target);
-  printf("Moving base\n");
+  //printf("Left side is %d, right side is %d\n", Robot::base->getLeftEncoder(), Robot::base->getRightEncoder());
 }
 
 bool MoveBaseTo::isFinished() {
@@ -41,14 +47,12 @@ bool MoveBaseTo::isFinished() {
 
 void MoveBaseTo::end() {
   // Code that runs when isFinished() returns true.
-  //Robot::base->lock();
-  //Robot::base->setMultiplier(1);
+  printf("At target\n");
   Robot::base->disablePID();
 }
 
 void MoveBaseTo::interrupted() {
   // Code that runs when this command is interrupted by another one
   // with a higher priority.
-  //Robot::base->setMultiplier(1);
   Robot::base->disablePID();
 }

@@ -23,6 +23,7 @@ class PIDController {
     int threshold = 15; // Default value
     float deltaTime = 0;
     int lastTime = 0;
+    float scalar = 1;
     static std::vector<PIDController*> instances; // A vector to contain all PIDController instances
     void addInstance();
   public:
@@ -40,6 +41,7 @@ class PIDController {
     bool atSetpoint();
     void loop();
     void lock();
+    void setMaxPIDSpeed(int maxSpeed = KMaxMotorSpeed);
     bool enabled = false;
     static void loopAll();
 };

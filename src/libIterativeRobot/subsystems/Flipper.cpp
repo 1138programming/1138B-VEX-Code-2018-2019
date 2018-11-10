@@ -42,6 +42,10 @@ void Flipper::enablePID() {
   flipperController->enabled = true;
 }
 
+void Flipper::setMaxPIDSpeed(int maxSpeed) {
+  flipperController->setMaxPIDSpeed(maxSpeed);
+}
+
 std::int32_t Flipper::getEncoderValue() {
   return flipperMotor->getEncoderValue();
 }

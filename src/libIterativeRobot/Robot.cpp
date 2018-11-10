@@ -6,18 +6,17 @@
 #include "libIterativeRobot/commands/StopBase.h"
 #include "libIterativeRobot/commands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/FlipperControl.h"
-#include "libIterativeRobot/commands/ClawControl.h"
 #include "libIterativeRobot/commands/FlipperUp.h"
-#include "libIterativeRobot/commands/FlipClaw.h"
 #include "libIterativeRobot/commands/SpeedChange.h"
 #include "libIterativeRobot/commands/MoveBaseTo.h"
 
-#include "libIterativeRobot/commands/AutonGroup1.h"
-#include "libIterativeRobot/commands/AutonGroup2.h"
+#include "libIterativeRobot/commands/RedAutonWaitTimes.h"
+#include "libIterativeRobot/commands/BlueAutonWaitTimes.h"
+#include "libIterativeRobot/commands/RedAutonEncoder.h"
+#include "libIterativeRobot/commands/BlueAutonEncoder.h"
 
 AutonChooser* Robot::autonChooser = 0;
 Base*  Robot::base = 0;
-Claw*  Robot::claw = 0;
 Flipper*  Robot::flipper = 0;
 
 pros::Controller* Robot::mainController = 0;
@@ -29,7 +28,6 @@ Robot::Robot() {
   // Initialize any subsystems
   autonChooser = AutonChooser::getInstance();
   base = new Base();
-  claw = new Claw();
   flipper = new Flipper();
 
   mainController = new pros::Controller(pros::E_CONTROLLER_MASTER);
@@ -73,10 +71,16 @@ void Robot::autonInit() {
 
   switch (autonChooser->getAutonChoice()) {
     case 0:
-      autonGroup = new AutonGroup1();
+      autonGroup = new RedAutonEncoder();
       break;
     case 1:
-      autonGroup = new AutonGroup2();
+      autonGroup = new BlueAutonEncoder();
+      break;
+    case 2:
+      autonGroup = new RedAutonWaitTimes();
+      break;
+    case 3:
+      autonGroup = new BlueAutonWaitTimes();
       break;
   }
 

@@ -2,12 +2,13 @@
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 
-MoveFlipperFor::MoveFlipperFor(int duration, int speed, bool endWithBase) {
+MoveFlipperFor::MoveFlipperFor(int duration, int speed, bool endWithBase, int threshold) {
   requires(Robot::flipper);
   this->priority = 1;
   this->duration = duration;
   this->speed = speed;
   this->endWithBase = endWithBase;
+  this->threshold = threshold;
 }
 
 bool MoveFlipperFor::canRun() {
@@ -29,7 +30,11 @@ void MoveFlipperFor::execute() {
 
 bool MoveFlipperFor::isFinished() {
   if (endWithBase) {
-    return Robot::base->atSetpoint();
+    if (pros::millis() - startTime >= threshold) {
+      return Robot::base->atSetpoint() || pros::millis() - startTime >= duration;
+    } else {
+      return pros::millis() - startTime >= duration;
+    }
   } else {
     return pros::millis() - startTime >= duration;
   }

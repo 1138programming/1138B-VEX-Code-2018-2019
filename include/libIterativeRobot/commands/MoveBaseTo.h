@@ -11,13 +11,14 @@ class MoveBaseTo: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    MoveBaseTo(int leftTarget = 0, int rightTarget = 0, int timeout = 2000, bool absolute = false);
+    MoveBaseTo(int leftTarget, int rightTarget, int maxSpeed = KMaxMotorSpeed, int timeout = 3000, bool absolute = false);
   private:
     int leftTarget = 0;
     int rightTarget = 0;
+    int maxSpeed = KMaxMotorSpeed;
+    bool absolute = false;
     int startTime = 0;
     int timeout = 0;
-    bool absolute = false;
 };
 
 #endif // _COMMANDS_MOVEBASETO_H_

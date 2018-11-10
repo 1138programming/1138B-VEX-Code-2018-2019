@@ -28,7 +28,10 @@ class Base : public libIterativeRobot::Subsystem {
     bool atSetpoint();
     void disablePID();
     void enablePID();
+    void setMaxPIDSpeed(int maxSpeed = KMaxMotorSpeed);
     void setMultiplier(float multiplier);
+    std::int32_t getLeftEncoder();
+    std::int32_t getRightEncoder();
     Base();
 };
 

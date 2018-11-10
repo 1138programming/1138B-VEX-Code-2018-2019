@@ -14,8 +14,10 @@ AutonChooser* AutonChooser::instance;
 AutonChooser::AutonChooser() {
   auton = 0;
 
-  autonNames.push_back("Red Auton\0");
-  autonNames.push_back("Blue Auton\0");
+  autonNames.push_back("Red Auton Encoder\0");
+  autonNames.push_back("Blue Auton Encoder\0");
+  autonNames.push_back("Red Auton Wait Times\0");
+  autonNames.push_back("Blue Auton Wait Times\0");
 
   numAutons = autonNames.size();
 }

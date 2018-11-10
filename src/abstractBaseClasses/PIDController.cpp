@@ -69,7 +69,7 @@ void PIDController::loop() {
   error = setpoint - currSensorValue;
   integral += error * (deltaTime / 1000);
   derivative  = (error - previousError) / (deltaTime / 1000);
-  output = (int)(kP * error + kI * integral + kD * derivative);
+  output = (int)(kP * error + kI * integral + kD * derivative * scalar);
   int sign = output < 0 ? output == 0 ? -1 : 0 : 1;
   //int sign = 0;
   output = confineToRange(output + (sign * 12));
@@ -86,6 +86,10 @@ void PIDController::loop() {
 
 void PIDController::lock() {
   setSetpoint(getSensorValue());
+}
+
+void PIDController::setMaxPIDSpeed(int maxSpeed) {
+  this->scalar = maxSpeed / KMaxMotorSpeed;
 }
 
 bool PIDController::atSetpoint() {

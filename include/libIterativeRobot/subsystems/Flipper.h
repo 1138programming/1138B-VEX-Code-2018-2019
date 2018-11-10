@@ -19,6 +19,7 @@ class Flipper : public libIterativeRobot::Subsystem {
     bool atSetpoint();
     void disablePID();
     void enablePID();
+    void setMaxPIDSpeed(int maxSpeed = KMaxMotorSpeed);
     std::int32_t getEncoderValue();
     Flipper();
 };

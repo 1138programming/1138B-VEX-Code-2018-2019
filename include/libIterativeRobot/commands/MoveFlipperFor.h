@@ -11,12 +11,13 @@ class MoveFlipperFor: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    MoveFlipperFor(int duration, int speed = 127, bool endWithBase = false);
+    MoveFlipperFor(int duration, int speed = KMaxMotorSpeed, bool endWithBase = false, int threshold = 100);
   private:
     int duration = 0;
-    int speed = 127;
-    bool endWithBase = false;
     int startTime;
+    int speed = KMaxMotorSpeed;
+    bool endWithBase = false;
+    int threshold = 100;
 };
 
 #endif // _COMMANDS_MOVEFLIPPERFOR_H_
