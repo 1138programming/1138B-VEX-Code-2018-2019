@@ -34,3 +34,5 @@
 # vscode stupidity - NoMod-Prpogramming
 .vscode/*
 bin/*
+compile_commands.json
+# More stupidity - NoMod-Programming
