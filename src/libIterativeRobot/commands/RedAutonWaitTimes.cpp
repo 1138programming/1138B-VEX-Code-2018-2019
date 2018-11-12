@@ -13,7 +13,9 @@ RedAutonWaitTimes::RedAutonWaitTimes() {
   addSequentialCommand(new MoveBaseFor(1000));
   addParallelCommand(new MoveFlipperTo(0, 1000, true));
   addSequentialCommand(new Delay(500));
+  addSequentialCommand(new MoveBaseFor(80, -127, -127));
+  addSequentialCommand(new Delay(500));
   addSequentialCommand(new MoveBaseFor(400, 127, -127));
   addSequentialCommand(new Delay(500));
-  addSequentialCommand(new MoveBaseFor(1625, -127, -127));
+  addSequentialCommand(new MoveBaseFor(1375, -127, -127));
 }
