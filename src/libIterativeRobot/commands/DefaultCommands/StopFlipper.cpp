@@ -1,4 +1,4 @@
-#include "libIterativeRobot/commands/StopFlipper.h"
+#include "libIterativeRobot/commands/DefaultCommands/StopFlipper.h"
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 

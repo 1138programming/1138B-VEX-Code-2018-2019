@@ -1,4 +1,4 @@
-#include "libIterativeRobot/commands/MoveFlipperTo.h"
+#include "libIterativeRobot/commands/EncoderCommands/MoveFlipperTo.h"
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 

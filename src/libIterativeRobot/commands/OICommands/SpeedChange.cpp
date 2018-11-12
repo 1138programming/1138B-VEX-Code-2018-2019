@@ -1,4 +1,4 @@
-#include "libIterativeRobot/commands/SpeedChange.h"
+#include "libIterativeRobot/commands/OICommands/SpeedChange.h"
 #include "libIterativeRobot/Robot.h"
 
 SpeedChange::SpeedChange(float multiplier) {

@@ -1,9 +1,9 @@
-#include "libIterativeRobot/commands/BlueAutonEncoder.h"
-#include "libIterativeRobot/commands/Delay.h"
-#include "libIterativeRobot/commands/MoveBaseTo.h"
-#include "libIterativeRobot/commands/MoveBaseFor.h"
-#include "libIterativeRobot/commands/MoveFlipperFor.h"
-#include "libIterativeRobot/commands/MoveFlipperTo.h"
+#include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonEncoder.h"
+#include "libIterativeRobot/commands/TimeCommands/Delay.h"
+#include "libIterativeRobot/commands/EncoderCommands/MoveBaseTo.h"
+#include "libIterativeRobot/commands/TimeCommands/MoveBaseFor.h"
+#include "libIterativeRobot/commands/TimeCommands/MoveFlipperFor.h"
+#include "libIterativeRobot/commands/EncoderCommands/MoveFlipperTo.h"
 
 BlueAutonEncoder::BlueAutonEncoder() {
   addSequentialCommand(new MoveBaseTo(300, 300));

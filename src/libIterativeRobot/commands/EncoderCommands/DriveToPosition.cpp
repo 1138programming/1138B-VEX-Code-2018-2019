@@ -1,4 +1,4 @@
-#include "libIterativeRobot/commands/DriveToPosition.h"
+#include "libIterativeRobot/commands/EncoderCommands/DriveToPosition.h"
 #include "libIterativeRobot/Robot.h"
 
 DriveToPosition::DriveToPosition(int leftTarget, int rightTarget, int motorSpeed) {

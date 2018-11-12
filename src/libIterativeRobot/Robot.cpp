@@ -3,17 +3,14 @@
 #include "libIterativeRobot/events/JoystickButton.h"
 #include "libIterativeRobot/events/JoystickChannel.h"
 
-#include "libIterativeRobot/commands/StopBase.h"
-#include "libIterativeRobot/commands/DriveWithJoy.h"
-#include "libIterativeRobot/commands/FlipperControl.h"
-#include "libIterativeRobot/commands/FlipperUp.h"
-#include "libIterativeRobot/commands/SpeedChange.h"
-#include "libIterativeRobot/commands/MoveBaseTo.h"
+#include "libIterativeRobot/commands/OICommands/DriveWithJoy.h"
+#include "libIterativeRobot/commands/OICommands/FlipperControl.h"
+#include "libIterativeRobot/commands/OICommands/SpeedChange.h"
 
-#include "libIterativeRobot/commands/RedAutonWaitTimes.h"
-#include "libIterativeRobot/commands/BlueAutonWaitTimes.h"
-#include "libIterativeRobot/commands/RedAutonEncoder.h"
-#include "libIterativeRobot/commands/BlueAutonEncoder.h"
+#include "libIterativeRobot/commands/AutonCommandGroups/RedAutonWaitTimes.h"
+#include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonWaitTimes.h"
+#include "libIterativeRobot/commands/AutonCommandGroups/RedAutonEncoder.h"
+#include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonEncoder.h"
 
 AutonChooser* Robot::autonChooser = 0;
 Base*  Robot::base = 0;
@@ -51,13 +48,9 @@ Robot::Robot() {
 
   flipperForward->whileHeld(new FlipperControl(127));
   flipperBackward->whileHeld(new FlipperControl(-127));
-  //PartnerLeftY->whilePastThreshold(new ClawControl());
 
-  //flipClaw->whenPressed(new FlipClaw());
   slowBase->whenPressed(new SpeedChange(0.5));
   normalBase->whenPressed(new SpeedChange(1));
-
-  //moveForward->whenPressed(new MoveBaseTo((int)ticksPerRev18, (int)ticksPerRev18));
 }
 
 void Robot::robotInit() {

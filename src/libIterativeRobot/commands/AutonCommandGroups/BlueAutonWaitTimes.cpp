@@ -1,11 +1,11 @@
-#include "libIterativeRobot/commands/RedAutonWaitTimes.h"
-#include "libIterativeRobot/commands/Delay.h"
-#include "libIterativeRobot/commands/MoveBaseTo.h"
-#include "libIterativeRobot/commands/MoveBaseFor.h"
-#include "libIterativeRobot/commands/MoveFlipperFor.h"
-#include "libIterativeRobot/commands/MoveFlipperTo.h"
+#include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonWaitTimes.h"
+#include "libIterativeRobot/commands/TimeCommands/Delay.h"
+#include "libIterativeRobot/commands/EncoderCommands/MoveBaseTo.h"
+#include "libIterativeRobot/commands/TimeCommands/MoveBaseFor.h"
+#include "libIterativeRobot/commands/TimeCommands/MoveFlipperFor.h"
+#include "libIterativeRobot/commands/EncoderCommands/MoveFlipperTo.h"
 
-RedAutonWaitTimes::RedAutonWaitTimes() {
+BlueAutonWaitTimes::BlueAutonWaitTimes() {
   addSequentialCommand(new MoveBaseFor(150));
   addSequentialCommand(new Delay(500));
   addSequentialCommand(new MoveFlipperFor(200, 127));
@@ -15,7 +15,7 @@ RedAutonWaitTimes::RedAutonWaitTimes() {
   addSequentialCommand(new Delay(500));
   addSequentialCommand(new MoveBaseFor(80, -127, -127));
   addSequentialCommand(new Delay(500));
-  addSequentialCommand(new MoveBaseFor(400, 127, -127));
+  addSequentialCommand(new MoveBaseFor(400, -127, 127));
   addSequentialCommand(new Delay(500));
   addSequentialCommand(new MoveBaseFor(1375, -127, -127));
 }
