@@ -1,5 +1,5 @@
 #include "main.h"
-#include "libIterativeRobot/commands/StopFlipper.h"
+#include "libIterativeRobot/commands/DefaultCommands/StopFlipper.h"
 
 Flipper::Flipper() {
   // Get flipper motors
