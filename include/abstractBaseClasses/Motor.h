@@ -64,6 +64,7 @@ class Motor {
     void reverse(); // Reverses the motor
     void setMultiplier(float multiplier); // Sets a multiplier to apply to the motor's speed
     void setEncoder(pros::ADIEncoder* encoder); // Sets an encoder to be used for v4 motors in place of a built in encoder
+    void resetEncoder();
     void addFollower(Motor* motor); // Adds a follower to the motor
 
     // These functions get something from the motor object
@@ -79,6 +80,7 @@ class Motor {
     int updateSlewRate(int targetSpeed); // Doesn't work
     void move(); // Applies the current speed to the motor
     static void periodicUpdate(); // Updates all motors. Calls the move function on all motors
+    static void resetEncoders();
 };
 
 #endif

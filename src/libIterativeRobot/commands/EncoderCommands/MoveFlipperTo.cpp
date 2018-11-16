@@ -4,7 +4,12 @@
 
 MoveFlipperTo::MoveFlipperTo(int target, int timeout, bool absolute) {
   requires(Robot::flipper);
+
   this->target = target;
+  this->timeout = timeout;
+  this->absolute = absolute;
+
+  this->priority = 1;
 }
 
 bool MoveFlipperTo::canRun() {
@@ -25,11 +30,13 @@ void MoveFlipperTo::initialize() {
 }
 
 void MoveFlipperTo::execute() {
-  //printf("Moving claw to: %d\n", target);
+  //printf("Moving flipper to %d, flipper is at %d, at target is %d\n", Robot::flipper->getSetpoint(), Robot::flipper->getEncoderValue(), Robot::flipper->atSetpoint());
 }
 
 bool MoveFlipperTo::isFinished() {
-  return Robot::flipper->atSetpoint() || pros::millis() - startTime >= timeout;
+  //return Robot::flipper->atSetpoint() || pros::millis() - startTime >= timeout;
+  return Robot::flipper->atSetpoint();
+  //return false;
 }
 
 void MoveFlipperTo::end() {

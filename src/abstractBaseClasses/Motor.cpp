@@ -44,13 +44,18 @@ void Motor::setMaster(Motor* motor) {
 
 // Initialize motorInstances array with motor instances
 void Motor::init() {
-  for (std::uint8_t i = 0; i < MAX_MOTORS; i++) {
-    motorInstances[i] = new Motor(i + 1);
-  }
+  //for (std::uint8_t i = 0; i < MAX_MOTORS; i++) {
+  //  motorInstances[i] = new Motor(i + 1);
+  //}
 }
 
 Motor* Motor::getMotor(int motorPort) {
-  return motorInstances[motorPort - 1];
+  if (motorInstances[motorPort - 1] == NULL) {
+    motorInstances[motorPort - 1] = new Motor(motorPort);
+    return motorInstances[motorPort - 1];
+  } else {
+    return motorInstances[motorPort - 1];
+  }
 }
 
 Motor* Motor::getMotor(Port motorPort) {
@@ -90,6 +95,12 @@ void Motor::setMultiplier(float multiplier) {
 
 void Motor::setEncoder(pros::ADIEncoder* encoder) {
   this->encoder = encoder;
+}
+
+void Motor::resetEncoder() {
+  if (motorType == v5) {
+    v5Motor->set_zero_position(0);
+  }
 }
 
 void Motor::addFollower(Motor* motor) {
@@ -169,6 +180,15 @@ void Motor::move() {
 void Motor::periodicUpdate() {
   for (int i = 0; i < MAX_MOTORS; i++) {
     //motorInstances[i]->updateSlewRate();
-    motorInstances[i]->move();
+    if (motorInstances[i] != NULL)
+      motorInstances[i]->move();
+  }
+}
+
+void Motor::resetEncoders() {
+  printf("Resetting encoders\n");
+  for (int i = 0; i < MAX_MOTORS; i++) {
+    if (motorInstances[i] != NULL)
+      motorInstances[i]->resetEncoder();
   }
 }

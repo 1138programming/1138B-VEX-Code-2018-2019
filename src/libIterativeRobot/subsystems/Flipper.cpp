@@ -5,7 +5,9 @@ Flipper::Flipper() {
   // Get flipper motors
   flipperMotor = Motor::getMotor(flipperPort);
 
-  flipperController = new PIDController(flipperMotor, 0.32, 0, 0.05);
+  flipperController = new PIDController(flipperMotor, 0.5, 0, 0);
+
+  flipperController->setThreshold(30);
 }
 
 void Flipper::initDefaultCommand() {
@@ -24,6 +26,10 @@ void Flipper::move(int speed) {
 
 void Flipper::setSetpoint(int setpoint) {
   flipperController->setSetpoint(setpoint);
+}
+
+int Flipper::getSetpoint() {
+  flipperController->getSetpoint();
 }
 
 void Flipper::setSetpointRelative(int setpoint) {

@@ -23,11 +23,11 @@ Base::Base() {
   rightFrontMotor->addFollower(rightMiddleMotor);
   rightFrontMotor->addFollower(rightBackMotor);
 
-  leftController = new PIDController(leftFrontMotor, 0.5, 0, 0);
-  rightController = new PIDController(rightFrontMotor, 0.5, 0, 0);
+  leftController = new PIDController(leftFrontMotor, 1.2, 0, 0.5);
+  rightController = new PIDController(rightFrontMotor, 1, 0, 0.5);
 
-  leftController->setThreshold(30);
-  rightController->setThreshold(30);
+  leftController->setThreshold(10);
+  rightController->setThreshold(10);
 }
 
 void Base::initDefaultCommand() {

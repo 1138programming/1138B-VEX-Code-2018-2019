@@ -59,7 +59,10 @@ void Robot::robotInit() {
 
 void Robot::autonInit() {
   printf("Default autonInit() function\n");
+
   libIterativeRobot::EventScheduler::getInstance()->initialize();
+  Motor::resetEncoders();
+
   autonChooser->uninit();
 
   switch (autonChooser->getAutonChoice()) {
@@ -90,6 +93,7 @@ void Robot::autonPeriodic() {
 void Robot::teleopInit() {
   printf("Default teleopInit() function\n");
   libIterativeRobot::EventScheduler::getInstance()->initialize();
+  Motor::resetEncoders();
   autonChooser->init();
 }
 
@@ -103,6 +107,7 @@ void Robot::teleopPeriodic() {
 void Robot::disabledInit() {
   printf("Default disabledInit() function\n");
   libIterativeRobot::EventScheduler::getInstance()->initialize();
+  Motor::resetEncoders();
   autonChooser->uninit();
 }
 

@@ -93,7 +93,10 @@ void PIDController::setMaxPIDSpeed(int maxSpeed) {
 }
 
 bool PIDController::atSetpoint() {
-  bool atSetpoint = inRange(this->currSensorValue, setpoint - threshold, setpoint + threshold) && fabs(derivative) < 0.1; // Checks if the sensor value is within a threshold of the target and whether the derivative is less than 0.1
+  currSensorValue = getSensorValue();
+  bool range = inRange(currSensorValue, setpoint - threshold, setpoint + threshold);
+  bool smallDerivative = fabs(derivative) < 0.1;
+  bool atSetpoint = range && smallDerivative; // Checks if the sensor value is within a threshold of the target and whether the derivative is less than 0.1
   return atSetpoint;
 }
 

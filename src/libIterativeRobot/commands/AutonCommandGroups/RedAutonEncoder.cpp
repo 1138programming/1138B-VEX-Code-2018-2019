@@ -6,6 +6,7 @@
 #include "libIterativeRobot/commands/EncoderCommands/MoveFlipperTo.h"
 
 RedAutonEncoder::RedAutonEncoder() {
+  //addSequentialCommand(new MoveBaseTo(1000, 1000));
   addSequentialCommand(new MoveBaseTo(300, 300));
   addParallelCommand(new Delay(1000));
   addSequentialCommand(new MoveFlipperFor(200, 127));
