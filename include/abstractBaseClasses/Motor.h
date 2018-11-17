@@ -23,7 +23,7 @@ enum MotorType {
 
 class Motor {
   private:
-    const static int defaultSlewStep = 56;
+    const static int defaultSlewStep = 7;
 
     std::uint8_t channel; // Motor channel
     pros::motor_gearset_e_t gearset; // v5 motor gearset
@@ -69,6 +69,7 @@ class Motor {
 
     // These functions get something from the motor object
     int getSpeed(); // Gets the last speed set
+    int getSlewedSpeed();
     int getTheshold(); // Gets the motor's threshold
     int getChannel(); // Gets the motor's channel
     std::int32_t getEncoderValue(); // Gets the encoder value of the motor

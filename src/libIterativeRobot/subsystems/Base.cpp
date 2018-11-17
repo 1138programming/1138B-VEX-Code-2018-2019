@@ -23,11 +23,11 @@ Base::Base() {
   rightFrontMotor->addFollower(rightMiddleMotor);
   rightFrontMotor->addFollower(rightBackMotor);
 
-  leftController = new PIDController(leftFrontMotor, 1.2, 0, 0.5);
-  rightController = new PIDController(rightFrontMotor, 1, 0, 0.5);
+  leftController = new PIDController(leftFrontMotor, 0.61, 0, 0.008);
+  rightController = new PIDController(rightFrontMotor, 0.6, 0, 0.008);
 
-  leftController->setThreshold(10);
-  rightController->setThreshold(10);
+  leftController->setThreshold(30);
+  rightController->setThreshold(30);
 }
 
 void Base::initDefaultCommand() {
@@ -77,6 +77,24 @@ void Base::setSetpoint(int leftSetpoint, int rightSetpoint) {
 void Base::setSetpointRelative(int leftSetpoint, int rightSetpoint) {
   leftController->setSetpointRelative(leftSetpoint);
   rightController->setSetpointRelative(rightSetpoint);
+}
+
+int Base::getSetpointLeft() {
+  return leftController->getSetpoint();
+}
+
+int Base::getSetpointRight() {
+  return rightController->getSetpoint();
+}
+
+int Base::getOutputLeft() {
+  return leftController->getOutput();
+  //return leftFrontMotor->getSlewedSpeed();
+}
+
+int Base::getOutputRight() {
+  return rightController->getOutput();
+  //return rightFrontMotor->getSlewedSpeed();
 }
 
 bool Base::atSetpoint() {

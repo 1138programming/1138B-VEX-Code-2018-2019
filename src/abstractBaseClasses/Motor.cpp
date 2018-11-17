@@ -129,6 +129,10 @@ int Motor::getSpeed() {
   return following ? master->getSpeed() : speed;
 }
 
+int Motor::getSlewedSpeed() {
+  return following ? master->getSlewedSpeed() : slewedSpeed;
+}
+
 // Return the motor channel
 int Motor::getChannel() {
   return channel;

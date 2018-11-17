@@ -25,6 +25,10 @@ class Base : public libIterativeRobot::Subsystem {
     bool baseAtTarget();
     void setSetpoint(int leftSetpoint, int rightSetpoint);
     void setSetpointRelative(int leftSetpoint, int rightSetpoint);
+    int getSetpointLeft();
+    int getSetpointRight();
+    int getOutputLeft();
+    int getOutputRight();
     bool atSetpoint();
     void disablePID();
     void enablePID();

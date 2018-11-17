@@ -25,7 +25,7 @@ void MoveBaseTo::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
 
-  //Robot::base->setMaxPIDSpeed(maxSpeed);
+  Robot::base->setMaxPIDSpeed(maxSpeed);
 
   Robot::base->enablePID();
   if (absolute)
@@ -38,11 +38,14 @@ void MoveBaseTo::initialize() {
 
 void MoveBaseTo::execute() {
   //printf("Moving base to: %d\n", target);
-  //printf("Left side is %d, right side is %d\n", Robot::base->getLeftEncoder(), Robot::base->getRightEncoder());
+  //printf("Left side error is %d, right side error is %d. Left side output is %d, right side output is %d\n", Robot::base->getSetpointLeft() - Robot::base->getLeftEncoder(), Robot::base->getSetpointRight() - Robot::base->getRightEncoder(), Robot::base->getOutputLeft(), Robot::base->getOutputRight());
+  //printf("Left side output is %d, right side output is %d\n", Robot::base->getOutputLeft(), Robot::base->getOutputRight());
 }
 
 bool MoveBaseTo::isFinished() {
   return Robot::base->atSetpoint() || pros::millis() - startTime >= timeout;
+  //return Robot::base->atSetpoint();
+  //return false;
 }
 
 void MoveBaseTo::end() {

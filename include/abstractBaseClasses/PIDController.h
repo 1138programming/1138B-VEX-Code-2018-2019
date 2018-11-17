@@ -24,6 +24,7 @@ class PIDController {
     float deltaTime = 0;
     int lastTime = 0;
     float scalar = 1;
+    int maxSpeed = KMaxMotorSpeed;
     static std::vector<PIDController*> instances; // A vector to contain all PIDController instances
     void addInstance();
   public:
@@ -34,6 +35,7 @@ class PIDController {
     void setSetpoint(int setpoint);
     void setSetpointRelative(int setpoint);
     int getSetpoint();
+    int getOutput();
     //void setSensorEncoder(pros::ADIEncoder* encoder);
     //void setSensorIME(unsigned char IMEaddress);
     int getSensorValue();

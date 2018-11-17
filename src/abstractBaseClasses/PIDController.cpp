@@ -41,6 +41,10 @@ int PIDController::getSetpoint() {
   return this->setpoint;
 }
 
+int PIDController::getOutput() {
+  return output;
+}
+
 /*void PIDController::setSensorEncoder(pros::ADIEncoder* encoder) {
   this->encoder = encoder;
   this->IMEaddress = 0;
@@ -69,10 +73,11 @@ void PIDController::loop() {
   error = setpoint - currSensorValue;
   integral += error * (deltaTime / 1000);
   derivative  = (error - previousError) / (deltaTime / 1000);
-  output = (int)(kP * error + kI * integral + kD * derivative * scalar);
+  output = (int)(kP * error + kI * integral + kD * derivative);
   int sign = output < 0 ? output == 0 ? -1 : 0 : 1;
   //int sign = 0;
-  output = confineToRange(output + (sign * 12));
+  output = confineToRange(output + (sign * 20), -maxSpeed, maxSpeed);
+  //printf("Output is %d\n", output);
   //printf("Current sensor value is %d\n", currSensorValue);
   //printf("Error is %d, integral is %f, derivative is %f, and output is %d\n", error, integral, derivative, output);
   //printf("Error is %d and output is %d\n", error, output);
@@ -89,13 +94,14 @@ void PIDController::lock() {
 }
 
 void PIDController::setMaxPIDSpeed(int maxSpeed) {
-  this->scalar = maxSpeed / KMaxMotorSpeed;
+  //scalar = (float)maxSpeed / (float)KMaxMotorSpeed;
+  this->maxSpeed = maxSpeed;
 }
 
 bool PIDController::atSetpoint() {
   currSensorValue = getSensorValue();
   bool range = inRange(currSensorValue, setpoint - threshold, setpoint + threshold);
-  bool smallDerivative = fabs(derivative) < 0.1;
+  bool smallDerivative = fabs(derivative) == 0;
   bool atSetpoint = range && smallDerivative; // Checks if the sensor value is within a threshold of the target and whether the derivative is less than 0.1
   return atSetpoint;
 }
