@@ -3,6 +3,7 @@
 #include "libIterativeRobot/events/JoystickButton.h"
 #include "libIterativeRobot/events/JoystickChannel.h"
 
+#include "libIterativeRobot/commands/OICommands/CatapultControl.h"
 #include "libIterativeRobot/commands/OICommands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/OICommands/FlipperControl.h"
 #include "libIterativeRobot/commands/OICommands/SpeedChange.h"
@@ -14,6 +15,7 @@
 
 AutonChooser* Robot::autonChooser = 0;
 Base*  Robot::base = 0;
+Catapult* Robot::catapult = 0;
 Flipper*  Robot::flipper = 0;
 
 pros::Controller* Robot::mainController = 0;
@@ -25,6 +27,7 @@ Robot::Robot() {
   // Initialize any subsystems
   autonChooser = AutonChooser::getInstance();
   base = new Base();
+  catapult = new Catapult();
   flipper = new Flipper();
 
   mainController = new pros::Controller(pros::E_CONTROLLER_MASTER);
@@ -33,6 +36,7 @@ Robot::Robot() {
   // Define buttons and channels
   libIterativeRobot::JoystickChannel* RightX = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_RIGHT_X);
   libIterativeRobot::JoystickChannel* LeftY = new libIterativeRobot::JoystickChannel(mainController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
+  libIterativeRobot::JoystickChannel* LeftYPartner = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   //libIterativeRobot::JoystickChannel* PartnerLeftY = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   //libIterativeRobot::JoystickButton* flipClaw = new libIterativeRobot::JoystickButton(partnerController, pros::E_CONTROLLER_DIGITAL_L1);
   libIterativeRobot::JoystickButton* flipperForward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
@@ -45,6 +49,8 @@ Robot::Robot() {
   DriveWithJoy* driveCommand = new DriveWithJoy();
   RightX->whilePastThreshold(driveCommand);
   LeftY->whilePastThreshold(driveCommand);
+
+  LeftYPartner->whilePastThreshold(new CatapultControl());
 
   flipperForward->whileHeld(new FlipperControl(127));
   flipperBackward->whileHeld(new FlipperControl(-127));

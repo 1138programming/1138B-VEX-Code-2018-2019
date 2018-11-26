@@ -14,17 +14,16 @@
 #define MAX_FOLLOWERS 3
 
 // Motor ports
-const int leftFrontBasePort = 6;
-const int leftMiddleBasePort = 7;
-const int leftBackBasePort = 8;
+const int firstCatapultPort = 1;
+const int secondCatapultPort = 2;
 
-const int rightFrontBasePort = 3;
-const int rightMiddleBasePort = 2;
-const int rightBackBasePort = 1;
+const int leftFrontBasePort = 3;
+const int leftBackBasePort = 4;
+
+const int rightFrontBasePort = 5;
+const int rightBackBasePort = 6;
 
 const int flipperPort = 9;
-
-const int clawPort = 10;
 
 //Motor and encoder constants
 const int KMaxMotorSpeed = 127;
