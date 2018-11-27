@@ -15,6 +15,9 @@ Base::Base() {
 
   rightFrontMotor->addFollower(rightBackMotor);
 
+  rightFrontMotor->reverse();
+  rightBackMotor->reverse();
+
   leftController = new PIDController(leftFrontMotor, 0.61, 0, 0.008);
   rightController = new PIDController(rightFrontMotor, 0.6, 0, 0.008);
 

@@ -6,7 +6,9 @@ Catapult::Catapult() {
   firstCatapultMotor = Motor::getMotor(firstCatapultPort);
   secondCatapultMotor = Motor::getMotor(secondCatapultPort);
 
-  secondCatapultMotor->reverse();
+  catapultController = new PIDController(firstCatapultMotor, 0.5, 0, 0);
+
+  firstCatapultMotor->reverse();
 
   firstCatapultMotor->addFollower(secondCatapultMotor);
 }
@@ -18,4 +20,28 @@ void Catapult::initDefaultCommand() {
 
 void Catapult::move(int speed) {
   firstCatapultMotor->setSpeed(speed);
+}
+
+void Catapult::setSetpoint(int setpoint) {
+  catapultController->setSetpoint(setpoint);
+}
+
+int Catapult::getSetpoint() {
+  catapultController->getSetpoint();
+}
+
+void Catapult::setSetpointRelative(int setpoint) {
+  catapultController->setSetpointRelative(setpoint);
+}
+
+bool Catapult::atSetpoint() {
+  return catapultController->atSetpoint();
+}
+
+void Catapult::disablePID() {
+  catapultController->enabled = false;
+}
+
+void Catapult::enablePID() {
+  catapultController->enabled = true;
 }

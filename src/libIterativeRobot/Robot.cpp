@@ -5,8 +5,10 @@
 
 #include "libIterativeRobot/commands/OICommands/CatapultControl.h"
 #include "libIterativeRobot/commands/OICommands/DriveWithJoy.h"
-#include "libIterativeRobot/commands/OICommands/FlipperControl.h"
+#include "libIterativeRobot/commands/OICommands/FlipperMove.h"
 #include "libIterativeRobot/commands/OICommands/SpeedChange.h"
+
+#include "libIterativeRobot/commands/EncoderCommands/MoveCollectorTo.h"
 
 #include "libIterativeRobot/commands/AutonCommandGroups/RedAutonWaitTimes.h"
 #include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonWaitTimes.h"
@@ -39,8 +41,8 @@ Robot::Robot() {
   libIterativeRobot::JoystickChannel* LeftYPartner = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   //libIterativeRobot::JoystickChannel* PartnerLeftY = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_LEFT_Y);
   //libIterativeRobot::JoystickButton* flipClaw = new libIterativeRobot::JoystickButton(partnerController, pros::E_CONTROLLER_DIGITAL_L1);
-  libIterativeRobot::JoystickButton* flipperForward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R1);
-  libIterativeRobot::JoystickButton* flipperBackward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_R2);
+  libIterativeRobot::JoystickChannel* flipperMove = new libIterativeRobot::JoystickChannel(partnerController, pros::E_CONTROLLER_ANALOG_RIGHT_Y);
+  libIterativeRobot::JoystickButton* catapultMoveCommand = new libIterativeRobot::JoystickButton(partnerController, pros::E_CONTROLLER_DIGITAL_R1);
   libIterativeRobot::JoystickButton* slowBase = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_UP);
   libIterativeRobot::JoystickButton* normalBase = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_DOWN);
   //libIterativeRobot::JoystickButton* moveForward = new libIterativeRobot::JoystickButton(mainController, pros::E_CONTROLLER_DIGITAL_RIGHT);
@@ -52,8 +54,9 @@ Robot::Robot() {
 
   LeftYPartner->whilePastThreshold(new CatapultControl());
 
-  flipperForward->whileHeld(new FlipperControl(127));
-  flipperBackward->whileHeld(new FlipperControl(-127));
+  flipperMove->whilePastThreshold(new FlipperMove());
+
+  catapultMoveCommand->whenPressed(new MoveCollectorTo(3000, 1500, false));
 
   slowBase->whenPressed(new SpeedChange(0.5));
   normalBase->whenPressed(new SpeedChange(1));

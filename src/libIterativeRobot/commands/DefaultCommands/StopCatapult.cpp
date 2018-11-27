@@ -19,7 +19,7 @@ void StopCatapult::initialize() {
 }
 
 void StopCatapult::execute() {
-  Robot::flipper->move(0);
+  Robot::catapult->move(0);
   //printf("Stopping flipper\n");
 }
 

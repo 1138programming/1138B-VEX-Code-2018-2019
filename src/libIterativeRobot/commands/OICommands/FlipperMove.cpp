@@ -1,17 +1,17 @@
-#include "libIterativeRobot/commands/OICommands/CatapultControl.h"
+#include "libIterativeRobot/commands/OICommands/FlipperMove.h"
 #include "libIterativeRobot/Robot.h"
 #include "Constants.h"
 
-CatapultControl::CatapultControl() {
-  requires(Robot::catapult);
+FlipperMove::FlipperMove() {
+  requires(Robot::flipper);
   this->priority = 2;
 }
 
-bool CatapultControl::canRun() {
+bool FlipperMove::canRun() {
   return true; // This is the default value anyways, so this method can be removed
 }
 
-void CatapultControl::initialize() {
+void FlipperMove::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
   // printf("Catapult control initialized\n");
@@ -19,21 +19,21 @@ void CatapultControl::initialize() {
   //printf("Catapult control initialized\n");
 }
 
-void CatapultControl::execute() {
+void FlipperMove::execute() {
   printf("Catapult control running\n");
-  Robot::catapult->move(threshold(Robot::partnerController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)));
+  Robot::flipper->move(threshold(Robot::partnerController->get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y)));
 }
 
-bool CatapultControl::isFinished() {
+bool FlipperMove::isFinished() {
   return true;
 }
 
-void CatapultControl::end() {
+void FlipperMove::end() {
   // Code that runs when isFinished() returns true.
   //Robot::catapult->lock();
 }
 
-void CatapultControl::interrupted() {
+void FlipperMove::interrupted() {
   // Code that runs when this command is interrupted by another one
   // with a higher priority.
 }
