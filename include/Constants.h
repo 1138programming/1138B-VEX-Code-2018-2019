@@ -39,9 +39,9 @@ const int exampleEncoderTopPort = 0;
 const int exampleEncoderBottomPort = 1;
 
 // Encoder Constants
-const int ticksPerRev36 = 1800; // Ticks per revolution on an 36:1 gear motor
-const int ticksPerRev18 = 900; // Ticks per revolution on an 18:1 gear motor
-const int ticksPerRev6 = 300; // Ticks per revolution on an 6:1 gear motor
+const int ticksPerRev36 = 1800; // Ticks per revolution on an 36:1 gear motor, 100 RPM
+const int ticksPerRev18 = 900; // Ticks per revolution on an 18:1 gear motor, 200 RPM
+const int ticksPerRev6 = 300; // Ticks per revolution on an 6:1 gear motor, 600 RPM
 
 // Global things that we need
 

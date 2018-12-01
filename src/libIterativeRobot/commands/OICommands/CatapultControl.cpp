@@ -20,7 +20,7 @@ void CatapultControl::initialize() {
 }
 
 void CatapultControl::execute() {
-  printf("Catapult control running\n");
+  printf("Catapult control running, encoder value is %d\n", Robot::catapult->getEncoderValue());
   Robot::catapult->move(threshold(Robot::partnerController->get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y)));
 }
 

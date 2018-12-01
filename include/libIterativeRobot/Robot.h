@@ -8,6 +8,7 @@
 
 class Robot : public libIterativeRobot::RobotBase {
   private:
+    const int thirdRotation = (int)(ticksPerRev36 * 25 / 3);
   protected:
     void robotInit();
     void autonInit();

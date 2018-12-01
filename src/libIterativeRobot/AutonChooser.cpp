@@ -12,7 +12,7 @@ lv_obj_t* AutonChooser::scrollRight = NULL;
 AutonChooser* AutonChooser::instance;
 
 AutonChooser::AutonChooser() {
-  auton = 0;
+  auton = 1;
 
   autonNames.push_back("Red Auton Encoder\0");
   autonNames.push_back("Blue Auton Encoder\0");

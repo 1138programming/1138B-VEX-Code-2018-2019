@@ -1,9 +1,9 @@
-#ifndef _COMMANDS_MOVECOLLECTORTO_H_
-#define _COMMANDS_MOVECOLLECTORTO_H_
+#ifndef _COMMANDS_MOVECATAPULTTO_H_
+#define _COMMANDS_MOVECATAPULTTO_H_
 
 #include "libIterativeRobot/commands/Command.h"
 
-class MoveCollectorTo: public libIterativeRobot::Command {
+class MoveCatapultTo: public libIterativeRobot::Command {
   public:
     bool canRun();
     void initialize();
@@ -11,7 +11,7 @@ class MoveCollectorTo: public libIterativeRobot::Command {
     bool isFinished();
     void end();
     void interrupted();
-    MoveCollectorTo(int target, int timeout = 2000, bool absolute = false);
+    MoveCatapultTo(int target, int timeout = 2000, bool absolute = false);
   private:
     int target = 0;
     int startTime = 0;
@@ -19,4 +19,4 @@ class MoveCollectorTo: public libIterativeRobot::Command {
     bool absolute = false;
 };
 
-#endif // _COMMANDS_MOVECOLLECTORTO_H_
+#endif // _COMMANDS_MOVECATAPULTTO_H_

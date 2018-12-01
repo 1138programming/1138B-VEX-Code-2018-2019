@@ -8,7 +8,8 @@
 #include "libIterativeRobot/commands/OICommands/FlipperMove.h"
 #include "libIterativeRobot/commands/OICommands/SpeedChange.h"
 
-#include "libIterativeRobot/commands/EncoderCommands/MoveCollectorTo.h"
+#include "libIterativeRobot/commands/EncoderCommands/MoveCatapultTo.h"
+#include "libIterativeRobot/commands/OICommands/LoadCatapult.h"
 
 #include "libIterativeRobot/commands/AutonCommandGroups/RedAutonWaitTimes.h"
 #include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonWaitTimes.h"
@@ -56,7 +57,8 @@ Robot::Robot() {
 
   flipperMove->whilePastThreshold(new FlipperMove());
 
-  catapultMoveCommand->whenPressed(new MoveCollectorTo(3000, 1500, false));
+  //catapultMoveCommand->whenPressed(new LoadCatapult());
+  catapultMoveCommand->whenPressed(new MoveCatapultTo(-thirdRotation, 5000));
 
   slowBase->whenPressed(new SpeedChange(0.5));
   normalBase->whenPressed(new SpeedChange(1));

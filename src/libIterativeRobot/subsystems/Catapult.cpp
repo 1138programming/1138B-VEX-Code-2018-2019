@@ -45,3 +45,7 @@ void Catapult::disablePID() {
 void Catapult::enablePID() {
   catapultController->enabled = true;
 }
+
+std::int32_t Catapult::getEncoderValue() {
+  return firstCatapultMotor->getEncoderValue();
+}

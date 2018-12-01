@@ -20,6 +20,7 @@ class Catapult : public libIterativeRobot::Subsystem {
     bool atSetpoint();
     void disablePID();
     void enablePID();
+    std::int32_t getEncoderValue();
     Catapult();
 };
 
