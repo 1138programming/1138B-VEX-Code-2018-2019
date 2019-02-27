@@ -8,34 +8,18 @@ class Base : public libIterativeRobot::Subsystem {
   private:
     // Base motors
     Motor* leftFrontMotor;
-    Motor* leftMiddleMotor;
+    Motor* leftMiddleMotor1;
+    Motor* leftMiddleMotor2;
     Motor* leftBackMotor;
 
     Motor* rightFrontMotor;
-    Motor* rightMiddleMotor;
+    Motor* rightMiddleMotor1;
+    Motor* rightMiddleMotor2;
     Motor* rightBackMotor;
-
-    PIDController* leftController;
-    PIDController* rightController;
 
   public:
     void initDefaultCommand();
     void move(int left, int right);
-    void moveBaseTo(int leftTarget, int rightTarget, int motorSpeed = 0);
-    bool baseAtTarget();
-    void setSetpoint(int leftSetpoint, int rightSetpoint);
-    void setSetpointRelative(int leftSetpoint, int rightSetpoint);
-    int getSetpointLeft();
-    int getSetpointRight();
-    int getOutputLeft();
-    int getOutputRight();
-    bool atSetpoint();
-    void disablePID();
-    void enablePID();
-    void setMaxPIDSpeed(int maxSpeed = KMaxMotorSpeed);
-    void setMultiplier(float multiplier);
-    std::int32_t getLeftEncoder();
-    std::int32_t getRightEncoder();
     Base();
 };
 

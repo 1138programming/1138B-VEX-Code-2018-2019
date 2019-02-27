@@ -22,13 +22,11 @@ class Robot : public libIterativeRobot::RobotBase {
     // Pointers to every subsystem on the robot:
     static AutonChooser* autonChooser;
     static Base* base;
-    static Flipper* flipper;
 
     libIterativeRobot::CommandGroup* autonGroup = NULL;
 
     // Pointers to controllers
     static pros::Controller* mainController;
-    static pros::Controller* partnerController;
 };
 
 

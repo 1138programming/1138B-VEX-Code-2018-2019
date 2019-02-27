@@ -18,7 +18,6 @@ void MoveBaseFor::initialize() {
   // Perform any initialization steps for this command here, not in the
   // constructor
   startTime = pros::millis();
-  Robot::base->disablePID();
 }
 
 void MoveBaseFor::execute() {

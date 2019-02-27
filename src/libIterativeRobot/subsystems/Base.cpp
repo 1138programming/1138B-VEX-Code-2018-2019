@@ -6,28 +6,27 @@
 Base::Base() {
   // Set up motors
   leftFrontMotor = Motor::getMotor(leftFrontBasePort);
-  leftMiddleMotor = Motor::getMotor(leftMiddleBasePort);
+  leftMiddleMotor1 = Motor::getMotor(leftMiddleBasePort1);
+  leftMiddleMotor2 = Motor::getMotor(leftMiddleBasePort2);
   leftBackMotor = Motor::getMotor(leftBackBasePort);
 
   rightFrontMotor = Motor::getMotor(rightFrontBasePort);
-  rightMiddleMotor = Motor::getMotor(rightMiddleBasePort);
+  rightMiddleMotor1 = Motor::getMotor(rightMiddleBasePort1);
+  rightMiddleMotor2 = Motor::getMotor(rightMiddleBasePort2);
   rightBackMotor = Motor::getMotor(rightBackBasePort);
 
-  rightBackMotor->reverse();
-  rightFrontMotor->reverse();
-  leftMiddleMotor->reverse();
+  leftFrontMotor->reverse();
+  leftMiddleMotor1->reverse();
+  leftMiddleMotor2->reverse();
+  leftBackMotor->reverse();
 
-  leftFrontMotor->addFollower(leftMiddleMotor);
+  leftFrontMotor->addFollower(leftMiddleMotor1);
+  leftFrontMotor->addFollower(leftMiddleMotor2);
   leftFrontMotor->addFollower(leftBackMotor);
 
-  rightFrontMotor->addFollower(rightMiddleMotor);
+  rightFrontMotor->addFollower(rightMiddleMotor1);
+  rightFrontMotor->addFollower(rightMiddleMotor2);
   rightFrontMotor->addFollower(rightBackMotor);
-
-  leftController = new PIDController(leftFrontMotor, 0.61, 0, 0.008);
-  rightController = new PIDController(rightFrontMotor, 0.6, 0, 0.008);
-
-  leftController->setThreshold(30);
-  rightController->setThreshold(30);
 }
 
 void Base::initDefaultCommand() {
@@ -41,85 +40,13 @@ void Base::initDefaultCommand() {
  * @param right - speed of the right side
  */
 void Base::move(int left, int right) {
-  leftFrontMotor->setSpeed(left);
-  rightFrontMotor->setSpeed(right);
-}
+  leftFrontMotor->getMotorObject()->move_velocity(left);
+  leftMiddleMotor1->getMotorObject()->move_velocity(left);
+  leftMiddleMotor2->getMotorObject()->move_velocity(left);
+  leftBackMotor->getMotorObject()->move_velocity(left);
 
-void Base::moveBaseTo(int leftTarget, int rightTarget, int motorSpeed) {
-  leftFrontMotor->getMotorObject()->move_relative(leftTarget, motorSpeed ? motorSpeed : 100); // TODO: Move last argument to a variable
-  leftMiddleMotor->getMotorObject()->move_relative(leftTarget, motorSpeed ? motorSpeed : 100);
-  leftBackMotor->getMotorObject()->move_relative(leftTarget, motorSpeed ? motorSpeed : 100);
-
-  rightFrontMotor->getMotorObject()->move_relative(rightTarget, motorSpeed ? motorSpeed : 100);
-  rightMiddleMotor->getMotorObject()->move_relative(rightTarget, motorSpeed ? motorSpeed : 100);
-  rightBackMotor->getMotorObject()->move_relative(rightTarget, motorSpeed ? motorSpeed : 100);
-}
-
-void Base::setMultiplier(float multiplier) {
-  leftFrontMotor->setMultiplier(multiplier);
-  leftMiddleMotor->setMultiplier(multiplier);
-  leftBackMotor->setMultiplier(multiplier);
-
-  rightFrontMotor->setMultiplier(multiplier);
-  rightMiddleMotor->setMultiplier(multiplier);
-  rightBackMotor->setMultiplier(multiplier);
-}
-
-bool Base::baseAtTarget() {
-  return abs(leftFrontMotor->getMotorObject()->get_target_position() - leftFrontMotor->getMotorObject()->get_position()) <= 5; // Tune threshold and make a varaible
-}
-
-void Base::setSetpoint(int leftSetpoint, int rightSetpoint) {
-  leftController->setSetpoint(leftSetpoint);
-  rightController->setSetpoint(rightSetpoint);
-}
-
-void Base::setSetpointRelative(int leftSetpoint, int rightSetpoint) {
-  leftController->setSetpointRelative(leftSetpoint);
-  rightController->setSetpointRelative(rightSetpoint);
-}
-
-int Base::getSetpointLeft() {
-  return leftController->getSetpoint();
-}
-
-int Base::getSetpointRight() {
-  return rightController->getSetpoint();
-}
-
-int Base::getOutputLeft() {
-  return leftController->getOutput();
-  //return leftFrontMotor->getSlewedSpeed();
-}
-
-int Base::getOutputRight() {
-  return rightController->getOutput();
-  //return rightFrontMotor->getSlewedSpeed();
-}
-
-bool Base::atSetpoint() {
-  return leftController->atSetpoint() && rightController->atSetpoint();
-}
-
-void Base::enablePID() {
-  leftController->enabled = true;
-  rightController->enabled = true;
-}
-
-void Base::disablePID() {
-  leftController->enabled = false;
-  rightController->enabled = false;
-}
-
-void Base::setMaxPIDSpeed(int maxSpeed) {
-  leftController->setMaxPIDSpeed(maxSpeed);
-  rightController->setMaxPIDSpeed(maxSpeed);
-}
-
-std::int32_t Base::getLeftEncoder() {
-  return leftFrontMotor->getEncoderValue();
-}
-
-std::int32_t Base::getRightEncoder() {
-  return rightFrontMotor->getEncoderValue();
+  rightFrontMotor->getMotorObject()->move_velocity(-right);
+  rightMiddleMotor1->getMotorObject()->move_velocity(-right);
+  rightMiddleMotor2->getMotorObject()->move_velocity(-right);
+  rightBackMotor->getMotorObject()->move_velocity(-right);
 }
