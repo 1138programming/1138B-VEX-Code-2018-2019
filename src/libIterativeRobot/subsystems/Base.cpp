@@ -40,6 +40,8 @@ void Base::initDefaultCommand() {
  * @param right - speed of the right side
  */
 void Base::move(int left, int right) {
+  left*= 2;
+  right *= 2;
   leftFrontMotor->getMotorObject()->move_velocity(left);
   leftMiddleMotor1->getMotorObject()->move_velocity(left);
   leftMiddleMotor2->getMotorObject()->move_velocity(left);
