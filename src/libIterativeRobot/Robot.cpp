@@ -6,10 +6,7 @@
 #include "libIterativeRobot/commands/OICommands/DriveWithJoy.h"
 #include "libIterativeRobot/commands/OICommands/SpeedChange.h"
 
-#include "libIterativeRobot/commands/AutonCommandGroups/RedAutonWaitTimes.h"
-#include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonWaitTimes.h"
-#include "libIterativeRobot/commands/AutonCommandGroups/RedAutonEncoder.h"
-#include "libIterativeRobot/commands/AutonCommandGroups/BlueAutonEncoder.h"
+#include "libIterativeRobot/commands/AutonCommandGroups/FrontTileAuton.h"
 
 AutonChooser* Robot::autonChooser = 0;
 Base*  Robot::base = 0;
@@ -44,24 +41,24 @@ void Robot::autonInit() {
   // libIterativeRobot::EventScheduler::getInstance()->initialize();
   // Motor::resetEncoders();
 
-  // autonChooser->uninit();
+  autonChooser->uninit();
 
-  // switch (autonChooser->getAutonChoice()) {
-  //   case 0:
-  //     autonGroup = new RedAutonEncoder();
-  //     break;
-  //   case 1:
-  //     autonGroup = new BlueAutonEncoder();
-  //     break;
-  //   case 2:
-  //     autonGroup = new RedAutonWaitTimes();
-  //     break;
-  //   case 3:
-  //     autonGroup = new BlueAutonWaitTimes();
-  //     break;
-  // }
+  switch (autonChooser->getAutonChoice()) {
+    case 0:
+      autonGroup = new FrontTileAuton(true);
+      break;
+    case 1:
+      autonGroup = new FrontTileAuton(false);
+      break;
+    case 2:
+      autonGroup = new FrontTileAuton(false);
+      break;
+    case 3:
+      autonGroup = new FrontTileAuton(true);
+      break;
+   }
 
-  // autonGroup->run();
+   autonGroup->run();
 }
 
 void Robot::autonPeriodic() {
@@ -75,7 +72,7 @@ void Robot::teleopInit() {
   printf("Default teleopInit() function\n");
   // libIterativeRobot::EventScheduler::getInstance()->initialize();
   // Motor::resetEncoders();
-  // autonChooser->init();
+  autonChooser->init();
 }
 
 void Robot::teleopPeriodic() {

@@ -14,10 +14,10 @@ AutonChooser* AutonChooser::instance;
 AutonChooser::AutonChooser() {
   auton = 0;
 
-  autonNames.push_back("Red Auton Encoder\0");
-  autonNames.push_back("Blue Auton Encoder\0");
-  autonNames.push_back("Red Auton Wait Times\0");
-  autonNames.push_back("Blue Auton Wait Times\0");
+  autonNames.push_back("Red Front Tile");
+  autonNames.push_back("Red Back Tile");
+  autonNames.push_back("Blue Front Tile");
+  autonNames.push_back("Blue Back Tile");
 
   numAutons = autonNames.size();
 }
@@ -35,7 +35,6 @@ lv_res_t AutonChooser::updateAutonName(lv_obj_t* btn) {
       auton--;
   }
   printf("Auton is %d, size is %d\n", auton, autonNames.size());
-  pros::delay(1000);
   lv_label_set_text(autonName, autonNames[auton]);
   return LV_RES_OK;
 }
